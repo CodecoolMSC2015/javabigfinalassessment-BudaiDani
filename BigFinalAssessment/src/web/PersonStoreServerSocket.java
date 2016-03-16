@@ -6,16 +6,20 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import dataReader.DataReader;
+
 public class PersonStoreServerSocket
 {
+	DataReader store;
 	private ServerSocket serverSocket;
+
 
 	public PersonStoreServerSocket(int port) throws IOException
 	{
 		serverSocket = new ServerSocket(port);
 	}
 
-	public static void run()
+	public static void start()
 	{
 		try
 		{
@@ -30,12 +34,12 @@ public class PersonStoreServerSocket
 			while (true)
 			{
 
+				System.out.println("Server closed!!");
+				ois.close();
+				oos.close();
+				server.close();
 			}
 
-			// System.out.println("Server closed!!");
-			// ois.close();
-			// oos.close();
-			// server.close();
 		}
 		catch (Exception e)
 		{
@@ -45,6 +49,6 @@ public class PersonStoreServerSocket
 
 	public static void main(String[] args)
 	{
-		run();
+		start();
 	}
 }

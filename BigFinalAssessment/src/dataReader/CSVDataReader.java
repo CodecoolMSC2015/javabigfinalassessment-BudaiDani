@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import person.Person;
 
@@ -17,54 +15,43 @@ public class CSVDataReader extends DataReader
 
 	public CSVDataReader()
 	{
-		BufferedReader reader = null;
-		try
-		{
-			reader = new BufferedReader(new FileReader("\\Documentation\\persons.csv"));
-		}
-		catch (FileNotFoundException e2)
-		{
-			e2.printStackTrace();
-		}
-
-		String line = null;
-		Scanner scanner = null;
-		int index = 0;
-		List<Person> personList = new ArrayList<>();
+		csvFilePath = ".\\Documentation\\persons.csv";
+		BufferedReader br = null;
+		String line = "";
+		String splitBy = ",";
 
 		try
 		{
-			while ((line = reader.readLine()) != null)
+			br = new BufferedReader(new FileReader(csvFilePath));
+			while ((line = br.readLine()) != null)
 			{
-				Person per = new Person();
-				scanner = new Scanner(line);
-				scanner.useDelimiter(",");
-				while (scanner.hasNext())
-				{
-					String data = scanner.next();
-					if (index == 0)
-						per.setName((data));
-					else if (index == 1)
-						per.setEmail(data);
-					else if (index == 2)
-						System.out.println(data);
-				}
-				index = 0;
-				personList.add(per);
+				String[] csvLine = line.split(splitBy);
+
+				System.out.println(csvLine[0] + "\t" + csvLine[1] + "\t" + csvLine[2]);
 			}
 		}
-		catch (IOException e1)
-		{
-			e1.printStackTrace();
-		}
 
-		try
+		catch (FileNotFoundException e)
 		{
-			reader.close();
+			e.printStackTrace();
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
+		}
+		finally
+		{
+			if (br != null)
+			{
+				try
+				{
+					br.close();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -72,6 +59,4 @@ public class CSVDataReader extends DataReader
 	{
 		new CSVDataReader();
 	}
-
 }
-
