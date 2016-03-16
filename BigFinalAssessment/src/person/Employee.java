@@ -36,4 +36,11 @@ public class Employee extends Person
 		this.jobTitle = jobTitle;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Name: " + getName() + "\nSalary:" + getSalary() + "\nJob Title: " + getJobTitle() + "\nEmail:"
+				+ getEmail();
+	}
+
 }

@@ -38,12 +38,12 @@ public class Person
 		this.email = email;
 	}
 
-	public List getSkills()
+	public List getSkillset()
 	{
 		return skillset;
 	}
 
-	public void setSkill(List skillset)
+	public void setSkillset(List skillset)
 	{
 		this.skillset = skillset;
 	}
